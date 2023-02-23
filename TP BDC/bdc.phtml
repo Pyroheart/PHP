@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>PHP</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha3/css/bootstrap.min.css' integrity='sha512-fjZwDJx4Wj5hoFYRWNETDlD7zty6PA+dUfdRYxe463OBATFHyx7jYs2mUK9BZ2WfHQAoOvKl6oYPCZHd1+t7Qw==' crossorigin='anonymous'/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>Bons de commande</h1>
+
+    <a href="index.php">Retourner à l'accueil</a>
+    <hr>
+
+    <!-- Le bon de commande -->
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Facture #<?= $customer['orderNumber'] ?>
+                <strong> le <?= date_create($customer['orderDate'])->format('d m Y') ?></strong>
+                <span class="float-right"> <strong>Status:</strong> <?= $customer['status'] ?></span>
+
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-sm-6">
+                        <h6 class="mb-3">From:</h6>
+                    <div>
+                    <strong>BlackRock</strong>
+                </div>
+
+                <div>International Scam</div>
+                <div>Escroc City</div>
+                <div>Escroc Country</div>
+                <div></div>
+            </div>
+
+            <div class="col-sm-6">
+                <h6 class="mb-3">To:</h6>
+                <div>
+                    <strong><?= $customer['customerName'] ?></strong>
+                </div>
+                <div>Attn: <?= $customer['contactFirstName'] ?> <?= $customer['contactLastName'] ?></div>
+                <div><?= $customer['addressLine1'] ?></div>
+                <div><?= $customer['postalCode'] .' ' . $customer['city'] ?></div>
+                <div></div>
+            </div>
+        </div>
+
+        <div class="table-responsive-sm">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="center">#</th>
+                        <th>Products</th>
+                        <th class="right">Unit Cost</th>
+                        <th class="center">Qty</th>
+                        <th class="right">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($products as $product): ?>
+                        <tr>
+                            <td class="center">1</td>
+                            <td class="left strong"><?= $product['productName'] ?></td>
+                            <td class="right"><?= number_format($product['priceEach'], 2) ?> €</td>
+                            <td class="center"><?= $product['quantityOrdered'] ?></td>
+                            <td class="right"><?= number_format($product['total_line'], 2) ?> €</td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-5">
+
+            </div>
+
+            <div class="col-lg-4 col-sm-5 ml-auto">
+                <table class="table table-clear">
+                    <tbody>
+                        <tr>
+                            <td class="left">
+                                <strong>Subtotal ht</strong>
+                            </td>
+                            <td class="right"><?= number_format($tat, 2) ?> €</td>
+                        </tr>
+                        <tr>
+                            <td class="left">
+                                <strong>Discount (20%)</strong>
+                            </td>
+                            <td class="right">No way</td>
+                        </tr>
+                        <tr>
+                            <td class="left">
+                                <strong>VAT (20%)</strong>
+                            </td>
+                            <td class="right"><?= number_format($totalAmountWithTva, 2) ?> €</td>
+                        </tr>
+                        <tr>
+                            <td class="left">
+                                <strong>Total</strong>
+                            </td>
+                            <td class="right">
+                                <strong><?= number_format($totalAmountTtc, 2) ?> €</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
