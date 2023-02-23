@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha3/css/bootstrap.min.css' integrity='sha512-fjZwDJx4Wj5hoFYRWNETDlD7zty6PA+dUfdRYxe463OBATFHyx7jYs2mUK9BZ2WfHQAoOvKl6oYPCZHd1+t7Qw==' crossorigin='anonymous' />
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Form Product</h1>
+
+    <!-- Error -->
+    <?php if (isset($error)) : ?>
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                <li> <?= $error ?> </li>
+            </ul>
+        </div>
+    <?php endif; ?>
+
+    <!-- Success -->
+    <?php if (isset($notif)) : ?>
+        <div class="alert alert-success" role="alert">
+            <ul>
+                <li> <?= $notif ?> </li>
+            </ul>
+        </div>
+    <?php endif; ?>
+
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+            <!--
+                - Champ nom
+                - Champ description
+                - Champ prix d'achat
+                - Champ photo (en bonus à faire une fois que tout les autres champs sont traités) -->
+            <label for="name">Comment s'appelle votre produit ?</label>
+            <br>
+            <input autofocus id="name" type="text" name="name" placeholder="product name">
+            <br>
+            <label for="pha">Prix d'achat</label>
+            <input type="text" name="pha">
+            <br>
+            <label for="file">Photo</label>
+            <input type="file" id="file" name="photo">
+            <hr>
+            <button class='btn btn-info' type="submit">Créer mon produit</button>
+            <button class='btn btn-warning' type="reset">Annuler</button>
+        </form>
+
+        <?php if (!is_null($notif)) : ?>
+            <div class="card">
+                <!-- Afficher la fiche produit avec son image en 200x200 -->
+                <?php include 'product.php' ?>
+            </div>
+        <?php endif; ?>
+    </div>
+
+
+</body>
+
+</html>
